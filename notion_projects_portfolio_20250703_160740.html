@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Projects Portfolio Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .refresh-indicator { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: #3B82F6; 
+            color: white; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .metric-card { 
+            transition: transform 0.2s; 
+        }
+        .metric-card:hover { 
+            transform: translateY(-2px); 
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="refresh-indicator">
+        🔄 Live Data: 16:07:40
+    </div>
+    
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                🏢 Projects Portfolio Dashboard
+            </h1>
+            <p class="text-gray-600 mb-4">Live data from Notion • Updated: July 03, 2025 at 16:07</p>
+            
+            <div class="mb-4">
+                <span class="inline-block px-4 py-2 rounded-lg text-white font-semibold bg-green-500">
+                    📊 PORTFOLIO STATUS: 179 TOTAL PROJECTS
+                </span>
+            </div>
+            
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="metric-card bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-blue-800 font-semibold">Total Projects</h3>
+                    <p class="text-3xl font-bold text-blue-600">179</p>
+                    <p class="text-sm text-blue-700">In Portfolio</p>
+                </div>
+                
+                <div class="metric-card bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-green-800 font-semibold">Active Projects</h3>
+                    <p class="text-3xl font-bold text-green-600">89</p>
+                    <p class="text-sm text-green-700">49.7% of Portfolio</p>
+                </div>
+                
+                <div class="metric-card bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                    <h3 class="text-purple-800 font-semibold">Total Commissioned</h3>
+                    <p class="text-3xl font-bold text-purple-600">100,913</p>
+                    <p class="text-sm text-purple-700">Meters Across All Projects</p>
+                </div>
+                
+                <div class="metric-card bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                    <h3 class="text-yellow-800 font-semibold">Recent Activity</h3>
+                    <p class="text-3xl font-bold text-yellow-600">136</p>
+                    <p class="text-sm text-yellow-700">Updated in Last 30 Days</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Project Status Distribution -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">📊 Project Status Distribution</h2>
+                <div id="statusChart" style="height: 350px;"></div>
+            </div>
+            
+            <!-- Commissioning Portfolio Breakdown -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">🔧 Commissioning Portfolio Breakdown</h2>
+                <div id="commissioningChart" style="height: 350px;"></div>
+            </div>
+        </div>
+
+        <!-- Top Performing Projects -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">🏆 Top Performing Projects (by Total Commissioning)</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-semibold">Rank</th>
+                            <th class="px-4 py-3 text-left font-semibold">Project Name</th>
+                            <th class="px-4 py-3 text-center font-semibold">Site ID</th>
+                            <th class="px-4 py-3 text-center font-semibold">Total Commissioned</th>
+                            <th class="px-4 py-3 text-center font-semibold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-3">🥇</td>
+                    <td class="px-4 py-3 font-medium">UC Tower 3</td>
+                    <td class="px-4 py-3 text-center">140128</td>
+                    <td class="px-4 py-3 text-center font-semibold text-green-600">4,849</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">Suites Under Commissioning</span>
+                    </td>
+                </tr>
+            
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-3">🥈</td>
+                    <td class="px-4 py-3 font-medium">UC Tower 2</td>
+                    <td class="px-4 py-3 text-center">140128</td>
+                    <td class="px-4 py-3 text-center font-semibold text-green-600">4,849</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">Suite Defieciency Reported</span>
+                    </td>
+                </tr>
+            
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-3">🥉</td>
+                    <td class="px-4 py-3 font-medium">M City (Bldg 2)</td>
+                    <td class="px-4 py-3 text-center">101083</td>
+                    <td class="px-4 py-3 text-center font-semibold text-green-600">4,228</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">Suite Commissioning Completed</span>
+                    </td>
+                </tr>
+            
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-3">4️⃣</td>
+                    <td class="px-4 py-3 font-medium">M City (Bldg 1)</td>
+                    <td class="px-4 py-3 text-center">101080</td>
+                    <td class="px-4 py-3 text-center font-semibold text-green-600">4,111</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">Suite Commissioning Completed</span>
+                    </td>
+                </tr>
+            
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-3">5️⃣</td>
+                    <td class="px-4 py-3 font-medium">Festival Phase 1 - Tower B</td>
+                    <td class="px-4 py-3 text-center">132488</td>
+                    <td class="px-4 py-3 text-center font-semibold text-green-600">3,367</td>
+                    <td class="px-4 py-3 text-center">
+                        <span class="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">Suite Commissioning Completed</span>
+                    </td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Portfolio Insights -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Requires Attention -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">🔍 Projects Requiring Attention</h2>
+                <ul class="space-y-2">
+                    
+                    <li class="text-red-600">• <strong>Sugar Wharf Phase 2</strong>: No updates in 121 days</li>
+                
+                    <li class="text-red-600">• <strong>34 Southport</strong>: No updates in 149 days</li>
+                
+                    <li class="text-red-600">• <strong>Exchange District Phase 3 -  Building 4</strong>: No updates in 104 days</li>
+                
+                    <li class="text-red-600">• <strong>The One (1 Bloor St)</strong>: No updates in 149 days</li>
+                
+                    <li class="text-red-600">• <strong>King West Commercial (King Condos)</strong>: No updates in 107 days</li>
+                
+                </ul>
+            </div>
+            
+            <!-- System Information -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">⚙️ System Information</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Database Schema:</strong> 65 fields detected</p>
+                    <p><strong>Auto-mapped Fields:</strong> 10 fields</p>
+                    <p><strong>Data Freshness:</strong> Real-time from Notion API</p>
+                    <p><strong>Last Updated:</strong> 2025-07-03 16:07:40</p>
+                </div>
+                
+                <details class="mt-4">
+                    <summary class="cursor-pointer text-blue-600 hover:text-blue-800">View Field Mappings</summary>
+                    <ul class="mt-2 text-xs text-gray-600">
+                        <li><strong>hot_commissioned:</strong> Suite Hot Meter Commissioned</li><li><strong>cold_commissioned:</strong> Suite Cold Meter Commissioned</li><li><strong>elec_commissioned:</strong> Suite Elec Commissioned</li><li><strong>status:</strong> Suite Commissioning Status</li><li><strong>route_id:</strong> Route ID</li><li><strong>gas_commissioned:</strong> Suite Gas Commissioned</li><li><strong>last_updated:</strong> Last Updated - python</li><li><strong>site_id:</strong> MCX Site ID</li><li><strong>thermal_commissioned:</strong> Suite Thermal Meter Commissioned</li><li><strong>project_name:</strong> Project Name</li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center text-gray-500 text-sm">
+            <p>🔄 Live Portfolio Dashboard • Connected to Notion • Auto-refreshes with latest project data</p>
+            <p>Generated by MCX Projects Intelligence System</p>
+        </div>
+    </div>
+
+    <script>
+        // Project Status Chart
+        const statusData = [{
+            values: [66, 69, 29, 5, 1, 9],
+            labels: ['Suite Commissioning Completed', 'Suites Not Started Commissioning', 'Suites Under Commissioning', 'Suite Defieciency Reported', 'Suites Ready for Commissioning', 'Unknown'],
+            type: 'pie',
+            marker: {
+                colors: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#6B7280']
+            },
+            textinfo: 'label+percent+value',
+            textposition: 'auto',
+            hovertemplate: '<b>%{label}</b><br>Projects: %{value}<br>Percentage: %{percent}<extra></extra>'
+        }];
+        
+        Plotly.newPlot('statusChart', statusData, {
+            showlegend: true,
+            legend: {orientation: 'h', y: -0.1},
+            margin: {t: 20, b: 60, l: 20, r: 20}
+        }, {responsive: true});
+
+        // Commissioning Chart
+        const commissioningData = [{
+            values: [21096, 21611, 30070, 27996, 140],
+            labels: ['Cold Water', 'Hot Water', 'Thermal', 'Electric', 'Gas'],
+            type: 'pie',
+            marker: {
+                colors: ['#3B82F6', '#EF4444', '#8B5CF6', '#F59E0B', '#10B981']
+            },
+            textinfo: 'label+percent+value',
+            textposition: 'auto',
+            hovertemplate: '<b>%{label}</b><br>Commissioned: %{value}<br>Percentage: %{percent}<extra></extra>'
+        }];
+        
+        Plotly.newPlot('commissioningChart', commissioningData, {
+            showlegend: true,
+            legend: {orientation: 'h', y: -0.1},
+            margin: {t: 20, b: 60, l: 20, r: 20}
+        }, {responsive: true});
+        
+        // Auto-refresh every 5 minutes for live data
+        setTimeout(() => location.reload(), 5 * 60 * 1000);
+    </script>
+</body>
+</html>
+        
